@@ -61,6 +61,8 @@ const Header = () => {
                       <li key={items.name} className="nav-item">
                         <Button
                           type="button"
+                          size="sm"
+                          className="ms-2"
                           variant="primary"
                           onClick={() => navigate(items.path)}
                         >

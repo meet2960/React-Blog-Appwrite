@@ -15,7 +15,7 @@ const LogoutBtn = () => {
       .catch(() => {});
   };
   return (
-    <Button type="button" onClick={handleLogout}>
+    <Button type="button" className="ms-2" size="sm" onClick={handleLogout}>
       Logout
     </Button>
   );

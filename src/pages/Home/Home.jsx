@@ -12,19 +12,21 @@ const Home = () => {
   const [posts, setPosts] = useState([]);
   const [loading, setLoading] = useState(false);
   useEffect(() => {
-    setLoading(true);
-    appwriteService
-      .getSelectedUserPost([Query.equal("userId", loginUserId.$id)])
-      .then((res) => {
-        console.log("Response", res);
-        setPosts(res.documents);
-      })
-      .catch((error) => {
-        console.log("Error in single post", error);
-      })
-      .finally(() => {
-        setLoading(false);
-      });
+    if (loginUserId) {
+      setLoading(true);
+      appwriteService
+        .getSelectedUserPost([Query.equal("userId", loginUserId.$id)])
+        .then((res) => {
+          console.log("Response", res);
+          setPosts(res.documents);
+        })
+        .catch((error) => {
+          console.log("Error in single post", error);
+        })
+        .finally(() => {
+          setLoading(false);
+        });
+    }
     // getSelecetedUserPost;
     // appwriteService
     //   .getAllActivePost([])
@@ -51,7 +53,11 @@ const Home = () => {
   if (posts.length === 0) {
     return (
       <Container>
-        <div>No Previous Post Found</div>
+        <div>
+          <h1 className="text-center">
+            No Posts Found, Please Login to create New
+          </h1>
+        </div>
       </Container>
     );
   }
