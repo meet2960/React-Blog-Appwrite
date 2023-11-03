@@ -17,8 +17,8 @@ const PostCard = ({ post }) => {
   }, [post]);
 
   return (
-    <Link to={`/post/${post?.$id}`} className="text-decoration-none">
-      <div className="d-flex flex-column">
+    <div className="post">
+      <Link to={`/post/${post?.$id}`} className="text-decoration-none">
         <div>
           {isLoading && (
             <React.Fragment>
@@ -27,21 +27,23 @@ const PostCard = ({ post }) => {
           )}
 
           <React.Fragment>
-            <img
-              src={imageSrc}
-              alt={post?.title}
-              className={`img-fluid rounded-3 ${
-                isLoading ? "d-none" : "d-block"
-              }`}
-              onLoad={() => setIsLoading(false)}
-            />
+            <div className="d-flex justify-content-center align-items-center">
+              <img
+                src={imageSrc}
+                alt={post?.title}
+                className={`post-img img-fluid rounded-3 ${
+                  isLoading ? "d-none" : "d-block"
+                }`}
+                onLoad={() => setIsLoading(false)}
+              />
+            </div>
           </React.Fragment>
+          <div className="mt-2">
+            <h6>{post?.title}</h6>
+          </div>
         </div>
-        <div className="mt-2">
-          <h5>{post?.title}</h5>
-        </div>
-      </div>
-    </Link>
+      </Link>
+    </div>
   );
 };
 

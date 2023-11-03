@@ -2,7 +2,8 @@ import React from "react";
 import LogoutBtn from "../Common/LogoutBtn";
 import { useSelector } from "react-redux";
 import { NavLink, useNavigate } from "react-router-dom";
-import { Button, Container } from "react-bootstrap";
+import { Button, Container, Form } from "react-bootstrap";
+import ProfileDropdown from "./ProfileDropdown";
 
 const Header = () => {
   const authStatus = useSelector((state) => state.auth.status);
@@ -37,11 +38,13 @@ const Header = () => {
   return (
     <div className="nav-bg">
       <Container>
-        <nav className="navbar navbar-expand-lg">
+        <nav className="navbar navbar-expand-lg py-3">
           <div className="container-fluid">
-            <NavLink to={"/"} className="navbar-brand">
-              TinyBlogs
-            </NavLink>
+            <h4 className="me-3 mb-0 fw-semibold">
+              <NavLink to={"/"} className="text-decoration-none">
+                TinyBlogs
+              </NavLink>
+            </h4>
             <button
               className="navbar-toggler"
               type="button"
@@ -54,6 +57,9 @@ const Header = () => {
               <span className="navbar-toggler-icon"></span>
             </button>
             <div className="collapse navbar-collapse" id="navbarTogglerDemo02">
+              <div>
+                <Form.Control type="text" placeholder="Search" />
+              </div>
               <ul className="navbar-nav ms-auto mb-2 mb-lg-0">
                 {navItems &&
                   navItems.map((items) =>
@@ -79,6 +85,7 @@ const Header = () => {
                   </React.Fragment>
                 )}
               </ul>
+              <ProfileDropdown />
             </div>
           </div>
         </nav>

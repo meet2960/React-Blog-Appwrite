@@ -4,9 +4,11 @@ import { Container } from "react-bootstrap";
 
 const Register = () => {
   return (
-    <Container>
-      <SignupForm />
-    </Container>
+    <section className="signup-page">
+      <Container>
+        <SignupForm />
+      </Container>
+    </section>
   );
 };
 

@@ -100,7 +100,6 @@ export class DatabaseService {
   }
 
   async getSelectedUserPost(queries = []) {
-    console.log("inside selected user posts");
     try {
       return await this.databases.listDocuments(
         conf.appwriteDatabaseId,
@@ -128,17 +127,11 @@ export class DatabaseService {
 
   // ! File upload services
   async uploadFile(file) {
-    try {
-      console.log("config file upload", file);
-      return await this.bucket.createFile(
-        conf.appwriteBucketId,
-        ID.unique(),
-        file
-      );
-    } catch (error) {
-      console.log("Error in config upload", error);
-      return false;
-    }
+    return await this.bucket.createFile(
+      conf.appwriteBucketId,
+      ID.unique(),
+      file
+    );
   }
 
   async deleteFile(fileId) {

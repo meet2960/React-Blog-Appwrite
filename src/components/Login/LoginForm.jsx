@@ -8,10 +8,11 @@ import { useForm } from "react-hook-form";
 import { Card, Col, Row } from "react-bootstrap";
 import { toast } from "react-toastify";
 import LoadingButton from "../Common/LoadingButton";
-
+import { BsEyeSlashFill, BsEyeFill } from "react-icons/bs";
 const LoginForm = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const [togglePassword, setTogglePassword] = useState(false);
   const {
     register,
     handleSubmit,
@@ -22,10 +23,9 @@ const LoginForm = () => {
       password: "meet@123",
     },
   });
-  const [error, setError] = useState("");
+
   const handleLogin = async (data) => {
     console.log("Data", data);
-    setError("");
     return await authService
       .login(data)
       .then((loginData) => {
@@ -46,19 +46,20 @@ const LoginForm = () => {
             });
         } else {
           console.log("Error while loggin in");
+          toast.error("Something Went Wrong");
         }
       })
       .catch((error) => {
-        console.log("Error While Login in", error.message);
-        toast.success(error.message);
+        toast.error(error.message);
       });
   };
+
   return (
     <div className="login-form">
       <Row className="">
         <Col xs={12} md={8} lg={6} className="mx-auto">
           <Card>
-            <Card.Body className="p-5">
+            <Card.Body className="p-lg-5">
               <h3 className="text-center">Sign in</h3>
               <form onSubmit={handleSubmit(handleLogin)}>
                 <Row className="gy-3">
@@ -79,14 +80,22 @@ const LoginForm = () => {
                     />
                   </Col>
                   <Col lg={12}>
-                    <InputField
-                      label="Password"
-                      placeholder="Enter Password"
-                      type="password"
-                      {...register("password", {
-                        required: true,
-                      })}
-                    />
+                    <div className="password-field">
+                      <InputField
+                        label="Password"
+                        placeholder="Enter Password"
+                        type={togglePassword ? "text" : "password"}
+                        {...register("password", {
+                          required: true,
+                        })}
+                      />
+                      <div
+                        className="eye-icon"
+                        onClick={() => setTogglePassword((prev) => !prev)}
+                      >
+                        {togglePassword ? <BsEyeFill /> : <BsEyeSlashFill />}
+                      </div>
+                    </div>
                   </Col>
                   <Col lg={12}>
                     <div className="d-flex justify-content-center align-items-center">
@@ -105,7 +114,6 @@ const LoginForm = () => {
                       <p className="me-1 mb-0">Don&apos;t have an account?</p>
                       <Link to={"/signup"}>Sign Up</Link>
                     </div>
-                    {error && <div className="text-danger">{error}</div>}
                   </Col>
                 </Row>
               </form>

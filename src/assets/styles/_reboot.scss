@@ -1,0 +1,9 @@
+.form-control {
+  font-size: 14px;
+  &::placeholder {
+    font-size: 14px;
+  }
+}
+.btn {
+  --bs-btn-font-size: 14px;
+}

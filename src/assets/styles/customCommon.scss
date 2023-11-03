@@ -1,5 +1,10 @@
+:root {
+  --bs-body-font-size: 14px;
+  --bs-btn-font-size: 14px;
+}
 body {
   font-family: "Poppins", sans-serif;
+  font-size: 14px;
 }
 .wrapper {
   min-height: 100vh;
@@ -34,9 +39,26 @@ body {
 }
 
 // * Login Page
-.login-page {
+.login-page,
+.signup-page {
   display: flex;
   justify-content: center;
   align-items: center;
   height: 100vh;
+}
+.password-field {
+  position: relative;
+  .eye-icon {
+    cursor: pointer;
+    position: absolute;
+    right: 5%;
+    top: 55%;
+  }
+}
+
+.post {
+  .post-img {
+    height: 200px;
+    object-fit: cover;
+  }
 }

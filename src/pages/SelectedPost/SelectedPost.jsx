@@ -5,6 +5,7 @@ import parse from "html-react-parser";
 import { useSelector } from "react-redux";
 import { Button, Container, Row } from "react-bootstrap";
 import { toast } from "react-toastify";
+import { BsPencilSquare, BsTrashFill } from "react-icons/bs";
 const SelectedPost = () => {
   const [post, setPost] = useState(null);
   const { slug } = useParams();
@@ -67,11 +68,11 @@ const SelectedPost = () => {
             <div className="">
               <Link to={`/edit-post/${post.$id}`}>
                 <Button variant="warning" className="mr-3">
-                  Edit
+                  <BsPencilSquare />
                 </Button>
               </Link>
               <Button variant={"danger"} onClick={deletePost}>
-                Delete
+                <BsTrashFill />
               </Button>
             </div>
           )}

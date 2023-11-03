@@ -73,21 +73,32 @@ const PostForm = ({ post }) => {
       //       console.log("Error in upload file", error);
       //     });
       // }
-      const file = await appwriteService.uploadFile(data.image[0]);
-
-      if (file) {
-        const fileId = file.$id;
-        data.featuredImage = fileId;
-        const dbPost = await appwriteService.createPost({
-          ...data,
-          userId: userData.$id,
+      return appwriteService
+        .uploadFile(data.image[0])
+        .then((uploadedFile) => {
+          if (uploadedFile) {
+            const fileId = uploadedFile.$id;
+            data.featuredImage = fileId;
+            return appwriteService
+              .createPost({
+                ...data,
+                userId: userData.$id,
+              })
+              .then((createdPost) => {
+                if (createdPost) {
+                  toast.success("success");
+                  navigate(`/post/${createdPost.$id}`);
+                }
+              })
+              .catch((error) => {
+                toast.error(error);
+              });
+          }
+        })
+        .catch((error) => {
+          console.log("Error While Uploading FIle", error);
+          toast.error(error.message);
         });
-
-        if (dbPost) {
-          toast.success("success");
-          navigate(`/post/${dbPost.$id}`);
-        }
-      }
     }
   };
 

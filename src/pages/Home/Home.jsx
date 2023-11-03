@@ -64,7 +64,7 @@ const Home = () => {
 
   return (
     <Container>
-      <Row>
+      <Row className="gy-3">
         {posts &&
           posts.map((items, index) => (
             <Col lg={3} key={items.$id}>

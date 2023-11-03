@@ -1,18 +1,24 @@
-import React from "react";
+import React, { useState } from "react";
 import authService from "../../appwrite/auth";
 import { useDispatch } from "react-redux";
 import { Button } from "react-bootstrap";
 import { logout } from "../../features/auth/authSlice";
+import { toast } from "react-toastify";
 
 const LogoutBtn = () => {
   const dispatch = useDispatch();
+  const [loading, setLoading] = useState(false);
   const handleLogout = () => {
+    setLoading(true);
     authService
       .logout()
       .then(() => {
         dispatch(logout());
+        toast.success("Logout Successfully");
       })
-      .catch(() => {});
+      .catch(() => {
+        toast.error("Error While Logging Out");
+      });
   };
   return (
     <Button type="button" className="ms-2" size="sm" onClick={handleLogout}>
