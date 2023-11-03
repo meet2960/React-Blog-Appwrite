@@ -1,0 +1,42 @@
+body {
+  font-family: "Poppins", sans-serif;
+}
+.wrapper {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+.main {
+  padding: 1rem 0;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+// * Navbar
+.nav-bg {
+  background-color: #fff;
+  box-shadow: 0 2px 4px rgba(15, 34, 58, 0.12);
+  left: 0;
+  position: -webkit-sticky;
+  position: sticky;
+  top: 0;
+  width: 100%;
+  z-index: 99;
+}
+// * Footer
+.footer {
+  background-color: #fff;
+  bottom: 0;
+  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+  position: -webkit-sticky;
+  // position: sticky;
+}
+
+// * Login Page
+.login-page {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
