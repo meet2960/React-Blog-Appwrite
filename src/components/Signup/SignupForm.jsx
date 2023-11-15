@@ -17,20 +17,19 @@ const SignupForm = () => {
     handleSubmit,
     formState: { isSubmitting },
   } = useForm();
+
   const handleSignup = async (data) => {
     console.log("Register Data", data);
-    try {
-      const userData = await authService
-        .createAccount(data)
-        .then((user) => {
-          console.log("userData in then", user);
-        })
-        .catch((error) => {
-          console.log("Error in singup catch", error);
-        });
-    } catch (error) {
-      toast.error(error.message);
-    }
+    return authService
+      .createAccount(data)
+      .then((user) => {
+        toast.success("User Registered Successfully");
+        navigate("/login");
+      })
+      .catch((error) => {
+        console.log("Error in singup catch", error);
+        toast.error(error.message);
+      });
   };
   return (
     <div className="signup-form">

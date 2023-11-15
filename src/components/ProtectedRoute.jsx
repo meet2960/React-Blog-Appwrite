@@ -10,8 +10,10 @@ const ProtectedRoute = ({ children, authentication = true }) => {
     // !TODO make is more easy
     if (authentication && authStatus !== authentication) {
       navigate("/login");
+      console.log("inside IF");
     } else if (!authentication && authStatus !== authentication) {
       navigate("/");
+      console.log("inside elseif");
     }
     setLoader(false);
   }, [authStatus, navigate, authentication]);

@@ -63,61 +63,9 @@ const PostForm = ({ post }) => {
         navigate(`/post/${dbPost.$id}`);
       }
     } else {
-      // const file = data.image[0];
-      // if (file) {
-      //   appwriteService
-      //     .uploadFile(file)
-      //     .then(async (uploadedFile) => {
-      //       const fileId = uploadedFile.$id;
-      //       data.featuredImage = fileId;
-      //       console.log("uploadedFile File", uploadedFile);
-      //       return appwriteService
-      //         .createPost({
-      //           ...data,
-      //           userId: userData.$id,
-      //         })
-      //         .then((newPost) => {
-      //           console.log("Response of Created Post", newPost);
-      //           toast.success("Post Created Successfully");
-      //           navigate(`/post/${newPost.$id}`);
-      //         })
-      //         .catch(() => {
-      //           toast.error("Error While Creating Post");
-      //         });
-      //     })
-      //     .catch((error) => {
-      //       console.log("Error in upload file", error);
-      //     });
-      // }
       return dispatch(createNewPost(data, userData.$id)).then((post) => {
         navigate(`/post/${post.$id}`);
       });
-      // return appwriteService
-      //   .uploadFile(data.image[0])
-      //   .then((uploadedFile) => {
-      //     if (uploadedFile) {
-      //       const fileId = uploadedFile.$id;
-      //       data.featuredImage = fileId;
-      //       return appwriteService
-      //         .createPost({
-      //           ...data,
-      //           userId: userData.$id,
-      //         })
-      //         .then((createdPost) => {
-      //           if (createdPost) {
-      //             toast.success("success");
-      //             navigate(`/post/${createdPost.$id}`);
-      //           }
-      //         })
-      //         .catch((error) => {
-      //           toast.error(error);
-      //         });
-      //     }
-      //   })
-      //   .catch((error) => {
-      //     console.log("Error While Uploading FIle", error);
-      //     toast.error(error.message);
-      //   });
     }
   };
 

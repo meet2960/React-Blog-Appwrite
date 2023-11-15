@@ -1,14 +1,13 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { login } from "../../features/auth/authSlice";
 import { InputField, SelectField } from "../index";
-import authService from "../../appwrite/auth";
 import { useDispatch } from "react-redux";
 import { useForm } from "react-hook-form";
 import { Card, Col, Row } from "react-bootstrap";
-import { toast } from "react-toastify";
 import LoadingButton from "../Common/LoadingButton";
+import { toast } from "react-toastify";
 import { BsEyeSlashFill, BsEyeFill } from "react-icons/bs";
+import { login } from "../../features/auth/action";
 const LoginForm = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -25,33 +24,10 @@ const LoginForm = () => {
   });
 
   const handleLogin = async (data) => {
-    console.log("Data", data);
-    return await authService
-      .login(data)
-      .then((loginData) => {
-        console.log("loginData", loginData);
-        if (loginData) {
-          return authService
-            .getCurrentUser()
-            .then((currUser) => {
-              console.log("currUser", currUser);
-              if (currUser && currUser.status) {
-                toast.success("Login Successfully");
-                dispatch(login(currUser));
-                navigate("/");
-              }
-            })
-            .catch((error) => {
-              console.log("Error WHile Getting Current User", error);
-            });
-        } else {
-          console.log("Error while loggin in");
-          toast.error("Something Went Wrong");
-        }
-      })
-      .catch((error) => {
-        toast.error(error.message);
-      });
+    return dispatch(login(data)).then((currentUser) => {
+      toast.success("Login Successfully");
+      navigate("/");
+    });
   };
 
   return (
@@ -102,8 +78,8 @@ const LoginForm = () => {
                       <LoadingButton
                         className="w-100"
                         type="submit"
-                        loading={isSubmitting ? true : false}
-                        disabled={isSubmitting ? true : false}
+                        loading={isSubmitting}
+                        disabled={isSubmitting}
                       >
                         Submit
                       </LoadingButton>

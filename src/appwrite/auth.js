@@ -13,6 +13,7 @@ class AuthService {
   }
 
   async createAccount({ email, password, name }) {
+    console.log("Received data", email, password, name);
     try {
       const userAccount = await this.account.create(
         ID.unique(),
@@ -20,12 +21,14 @@ class AuthService {
         password,
         name
       );
-      if (userAccount) {
-        // ? If you want to login user directly after signup,
-        return this.login(email, password);
-      } else {
-        return userAccount;
-      }
+      // if (userAccount) {
+      //   console.log("userAccount", userAccount);
+      //   // ? If you want to login user directly after signup,
+      //   return this.login(email, password);
+      // } else {
+      //   return userAccount;
+      // }
+      return userAccount;
     } catch (error) {
       throw error;
     }

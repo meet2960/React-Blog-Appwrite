@@ -1,14 +1,5 @@
-import React, { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
-import authService from "../appwrite/auth";
-import { login, logout } from "../features/auth/authSlice";
-import {
-  BrowserRouter,
-  Routes,
-  Route,
-  RouterProvider,
-  createBrowserRouter,
-} from "react-router-dom";
+import React, { lazy, Suspense } from "react";
+import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import Layout from "../pages/Layout";
 import Home from "../pages/Home/Home";
 import Register from "../pages/Signup/Register";
@@ -22,12 +13,32 @@ import ProtectedRoute from "../components/ProtectedRoute";
 const AppRoutes = () => {
   const router = createBrowserRouter([
     {
+      path: "/login",
+      element: (
+        <ProtectedRoute authentication={false}>
+          <Login />
+        </ProtectedRoute>
+      ),
+    },
+    {
+      path: "/signup",
+      element: (
+        <ProtectedRoute authentication={false}>
+          <Register />
+        </ProtectedRoute>
+      ),
+    },
+    {
       path: "/",
       element: <Layout />,
       children: [
         {
           path: "/",
-          element: <Home />,
+          element: (
+            <ProtectedRoute authentication>
+              <Home />,
+            </ProtectedRoute>
+          ),
         },
         {
           path: "/all-posts",
@@ -55,41 +66,19 @@ const AppRoutes = () => {
         },
         {
           path: "/post/:slug",
-          element: <SelectedPost />,
+          element: (
+            <ProtectedRoute authentication>
+              <SelectedPost />,
+            </ProtectedRoute>
+          ),
         },
       ],
-    },
-    {
-      path: "/login",
-      element: (
-        <ProtectedRoute authentication={false}>
-          <Login />
-        </ProtectedRoute>
-      ),
-    },
-
-    {
-      path: "/signup",
-      element: (
-        <ProtectedRoute authentication={false}>
-          <Register />
-        </ProtectedRoute>
-      ),
     },
   ]);
 
   return (
     <React.Fragment>
       <RouterProvider router={router} />
-      {/* <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<Layout />}>
-            <Route index element={<Home />} />
-            <Route path="/login" element={<Login />} />
-            <Route path="/register" element={<Register />} />
-          </Route>
-        </Routes>
-      </BrowserRouter> */}
     </React.Fragment>
   );
 };
