@@ -18,8 +18,8 @@ const LoginForm = () => {
     formState: { isSubmitting },
   } = useForm({
     defaultValues: {
-      email: "meet@gmail.com",
-      password: "meet@123",
+      // email: "meet@gmail.com",
+      // password: "meet@123",
     },
   });
 
