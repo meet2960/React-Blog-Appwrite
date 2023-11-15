@@ -4,12 +4,20 @@ import { Button, Col, Row, Spinner } from "react-bootstrap";
 import { RTE, InputField, SelectField } from "../index";
 import appwriteService from "../../appwrite/config";
 import { useNavigate } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { toast } from "react-toastify";
+import { useFilePreview } from "../../hooks/useFilePreview";
+import { createNewPost } from "../../features/posts/action";
+import LoadingButton from "../Common/LoadingButton";
 
 const PostForm = ({ post }) => {
+  const dispatch = useDispatch();
+  const { filePreview, previewLoading, setPreviewLoading } = useFilePreview(
+    post?.featuredImage ? post.featuredImage : ""
+  );
   console.log("update post", post);
+  console.log("update Re rendering");
   const {
     control,
     register,
@@ -24,13 +32,21 @@ const PostForm = ({ post }) => {
       slug: post?.slug || "",
       content: post?.slug || "",
       status: post?.status || "active",
+      visibility: post?.visibility || "public",
+    },
+    values: {
+      title: post?.title || "",
+      slug: post?.slug || "",
+      content: post?.slug || "",
+      status: post?.status || "active",
+      visibility: post?.visibility || "public",
     },
   });
   const navigate = useNavigate();
   const { userData } = useSelector((state) => state.auth);
 
   const updateFormData = async (data) => {
-    console.log("fiorm data", data);
+    console.log("component data", data);
     if (post) {
       const file = data.image[0]
         ? appwriteService.uploadFile(data.image[0])
@@ -73,32 +89,35 @@ const PostForm = ({ post }) => {
       //       console.log("Error in upload file", error);
       //     });
       // }
-      return appwriteService
-        .uploadFile(data.image[0])
-        .then((uploadedFile) => {
-          if (uploadedFile) {
-            const fileId = uploadedFile.$id;
-            data.featuredImage = fileId;
-            return appwriteService
-              .createPost({
-                ...data,
-                userId: userData.$id,
-              })
-              .then((createdPost) => {
-                if (createdPost) {
-                  toast.success("success");
-                  navigate(`/post/${createdPost.$id}`);
-                }
-              })
-              .catch((error) => {
-                toast.error(error);
-              });
-          }
-        })
-        .catch((error) => {
-          console.log("Error While Uploading FIle", error);
-          toast.error(error.message);
-        });
+      return dispatch(createNewPost(data, userData.$id)).then((post) => {
+        navigate(`/post/${post.$id}`);
+      });
+      // return appwriteService
+      //   .uploadFile(data.image[0])
+      //   .then((uploadedFile) => {
+      //     if (uploadedFile) {
+      //       const fileId = uploadedFile.$id;
+      //       data.featuredImage = fileId;
+      //       return appwriteService
+      //         .createPost({
+      //           ...data,
+      //           userId: userData.$id,
+      //         })
+      //         .then((createdPost) => {
+      //           if (createdPost) {
+      //             toast.success("success");
+      //             navigate(`/post/${createdPost.$id}`);
+      //           }
+      //         })
+      //         .catch((error) => {
+      //           toast.error(error);
+      //         });
+      //     }
+      //   })
+      //   .catch((error) => {
+      //     console.log("Error While Uploading FIle", error);
+      //     toast.error(error.message);
+      //   });
     }
   };
 
@@ -161,12 +180,20 @@ const PostForm = ({ post }) => {
 
           <Col xs={12} lg={6}>
             <SelectField
-              options={["active", "inactive"]}
+              options={["Active", "Inactive"]}
               label="Status"
               {...register("status", { required: true })}
             />
           </Col>
-          <Col xs={12}>
+
+          <Col xs={12} lg={6}>
+            <SelectField
+              options={["Public", "Private"]}
+              label="Visibility"
+              {...register("visibility", { required: true })}
+            />
+          </Col>
+          <Col xs={6}>
             <RTE
               label="Content :"
               name="content"
@@ -174,34 +201,32 @@ const PostForm = ({ post }) => {
               defaultValue={getValues("content")}
             />
           </Col>
-          <Col xs={12}>
-            <div className="d-flex justify-content-center align-items-center">
-              <div className="col-3">
-                <Button className="w-100" type="submit">
-                  {isSubmitting ? (
-                    <React.Fragment>
-                      <Spinner size="sm" />
-                    </React.Fragment>
-                  ) : post ? (
-                    "Update"
-                  ) : (
-                    "Submit"
-                  )}
-                </Button>
-              </div>
-            </div>
-          </Col>
-          <Col xs={12}>
+          <Col xs={6}>
             <div className="">
               {post && (
                 <div className="w-full mb-4">
+                  <label className="form-label">File</label>
                   <img
-                    src={appwriteService.getFilePreview(post.featuredImage)}
+                    src={filePreview}
                     alt={post.title}
                     className="rounded-lg img-fluid"
                   />
                 </div>
               )}
+            </div>
+          </Col>
+          <Col xs={12}>
+            <div className="d-flex justify-content-center align-items-center">
+              <div className="col-3">
+                <LoadingButton
+                  type="submit"
+                  className="w-100"
+                  loading={isSubmitting}
+                  disabled={isSubmitting}
+                >
+                  {post ? "Update" : "Submit"}
+                </LoadingButton>
+              </div>
             </div>
           </Col>
         </Row>

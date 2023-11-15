@@ -1,46 +1,27 @@
-import React, { useState, useEffect } from "react";
-import appwriteService from "../../appwrite/config";
+import Loader from "../../components/Common/Loader";
+import { useState, useEffect } from "react";
 import { Col, Container, Row } from "react-bootstrap";
 import { PostCard } from "../../components";
-import Loader from "../../components/Common/Loader";
-import { Query } from "appwrite";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { clearUserPosts } from "../../features/posts/postSlice";
+import { getAllUserPosts } from "../../features/posts/action";
 
 const Home = () => {
+  const dispatch = useDispatch();
   const loginUserId = useSelector((state) => state.auth.userData);
-  console.log("login userId", loginUserId);
-  const [posts, setPosts] = useState([]);
+  const { userPosts } = useSelector((state) => state.posts);
   const [loading, setLoading] = useState(false);
   useEffect(() => {
     if (loginUserId) {
       setLoading(true);
-      appwriteService
-        .getSelectedUserPost([Query.equal("userId", loginUserId.$id)])
-        .then((res) => {
-          console.log("Response", res);
-          setPosts(res.documents);
-        })
-        .catch((error) => {
-          console.log("Error in single post", error);
-        })
-        .finally(() => {
-          setLoading(false);
-        });
+      dispatch(getAllUserPosts(loginUserId)).finally(() => {
+        setLoading(false);
+      });
     }
-    // getSelecetedUserPost;
-    // appwriteService
-    //   .getAllActivePost([])
-    //   .then((res) => {
-    //     console.log("Response", res);
-    //     setPosts(res.documents);
-    //   })
-    //   .catch((error) => {
-    //     console.log("Error in single post", error);
-    //   })
-    //   .finally(() => {
-    //     setLoading(false);
-    //   });
-  }, []);
+    return () => {
+      dispatch(clearUserPosts({}));
+    };
+  }, [loginUserId, dispatch]);
 
   if (loading) {
     return (
@@ -50,23 +31,12 @@ const Home = () => {
     );
   }
 
-  if (posts.length === 0) {
-    return (
-      <Container>
-        <div>
-          <h1 className="text-center">
-            No Posts Found, Please Login to create New
-          </h1>
-        </div>
-      </Container>
-    );
-  }
-
   return (
     <Container>
       <Row className="gy-3">
-        {posts &&
-          posts.map((items, index) => (
+        <h4 className="text-center">My Posts</h4>
+        {userPosts &&
+          userPosts.map((items, index) => (
             <Col lg={3} key={items.$id}>
               <PostCard post={items} />
             </Col>

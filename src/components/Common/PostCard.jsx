@@ -1,26 +1,16 @@
-import React, { useEffect, useState } from "react";
-import appwriteService from "../../appwrite/config";
+import React from "react";
 import { Link } from "react-router-dom";
+import { useFilePreview } from "../../hooks/useFilePreview";
 const PostCard = ({ post }) => {
-  const [imageSrc, setImageSrc] = useState(null);
-  const [isLoading, setIsLoading] = useState(true);
-  // !TODO Use redux to get the data,
-  useEffect(() => {
-    if (post.featuredImage) {
-      appwriteService
-        .getFilePreview(post.featuredImage)
-        .then((res) => {
-          setImageSrc(res);
-        })
-        .catch(() => {});
-    }
-  }, [post]);
+  const { filePreview, previewLoading, setPreviewLoading } = useFilePreview(
+    post.featuredImage
+  );
 
   return (
     <div className="post">
       <Link to={`/post/${post?.$id}`} className="text-decoration-none">
         <div>
-          {isLoading && (
+          {previewLoading && (
             <React.Fragment>
               <div className="skeleton skeleton-img" />
             </React.Fragment>
@@ -29,17 +19,19 @@ const PostCard = ({ post }) => {
           <React.Fragment>
             <div className="d-flex justify-content-center align-items-center">
               <img
-                src={imageSrc}
+                src={filePreview}
                 alt={post?.title}
                 className={`post-img img-fluid rounded-3 ${
-                  isLoading ? "d-none" : "d-block"
+                  previewLoading ? "d-none" : "d-block"
                 }`}
-                onLoad={() => setIsLoading(false)}
+                onLoad={() => {
+                  setPreviewLoading(false);
+                }}
               />
             </div>
           </React.Fragment>
           <div className="mt-2">
-            <h6>{post?.title}</h6>
+            <h6>{post.title}</h6>
           </div>
         </div>
       </Link>

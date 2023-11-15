@@ -67,6 +67,7 @@ const AppRoutes = () => {
         </ProtectedRoute>
       ),
     },
+
     {
       path: "/signup",
       element: (

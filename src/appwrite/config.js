@@ -1,3 +1,4 @@
+import { toast } from "react-toastify";
 import conf from "../conf/conf";
 import { Client, ID, Databases, Storage, Query } from "appwrite";
 
@@ -13,27 +14,23 @@ export class DatabaseService {
     this.bucket = new Storage(this.client);
   }
 
-  async createPost({ title, slug, content, featuredImage, status, userId }) {
-    console.log(
-      "inside createPOst",
-      title,
-      content,
-      featuredImage,
-      status,
-      userId,
-      slug
-    );
+  async createPost(
+    userId,
+    slug,
+    { title, content, featuredImage, visibility, status }
+  ) {
     try {
       return await this.databases.createDocument(
         conf.appwriteDatabaseId,
         conf.appwriteCollectionId,
         slug,
         {
-          title,
           slug,
+          title,
           content,
           featuredImage,
           status,
+          visibility,
           userId,
         }
       );
@@ -69,7 +66,8 @@ export class DatabaseService {
       );
       return true;
     } catch (error) {
-      console.log("Error");
+      console.log("Error", error);
+      toast.error("Error, Something went Wrong");
       return false;
     }
   }

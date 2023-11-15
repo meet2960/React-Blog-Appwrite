@@ -102,8 +102,8 @@ const LoginForm = () => {
                       <LoadingButton
                         className="w-100"
                         type="submit"
-                        loading={isSubmitting}
-                        disabled={isSubmitting}
+                        loading={isSubmitting ? true : false}
+                        disabled={isSubmitting ? true : false}
                       >
                         Submit
                       </LoadingButton>

@@ -17,7 +17,7 @@ const SelectField = (
       >
         {options &&
           options.map((items) => (
-            <option value={items} key={items}>
+            <option value={items.toLowerCase()} key={items}>
               {items}
             </option>
           ))}
