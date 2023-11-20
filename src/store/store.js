@@ -9,6 +9,8 @@ const store = configureStore({
     layout: layoutSlice,
     posts: postSlice,
   },
+  /* eslint-disable */
+  devTools: process.env.NODE_ENV !== "production",
 });
 
 export default store;

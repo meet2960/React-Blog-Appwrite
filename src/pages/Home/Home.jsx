@@ -30,7 +30,8 @@ const Home = () => {
       </div>
     );
   }
-
+  /* eslint-disable */
+  console.log(process.env.NODE_ENV);
   return (
     <Container>
       <Row className="gy-3">
