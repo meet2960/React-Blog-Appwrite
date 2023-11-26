@@ -23,7 +23,7 @@ const AllPost = () => {
       <div>
         <Row>
           {posts &&
-            posts.map((items, index) => (
+            posts.map((items,) => (
               <Col lg={3} key={items.$id}>
                 <PostCard post={items} />
               </Col>
