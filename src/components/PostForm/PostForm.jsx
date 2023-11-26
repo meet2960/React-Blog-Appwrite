@@ -44,6 +44,7 @@ const PostForm = ({ post }) => {
   });
   const navigate = useNavigate();
   const { userData } = useSelector((state) => state.auth);
+  console.log("component data", userData);
 
   const updateFormData = async (data) => {
     console.log("component data", data);

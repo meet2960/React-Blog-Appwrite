@@ -1,7 +1,7 @@
 import React from "react";
 import { Dropdown } from "react-bootstrap";
 import { BiSolidUserCircle } from "react-icons/bi";
-import LogoutBtn from "@/component//Common/LogoutBtn";
+import LogoutBtn from "@/components/Common/LogoutBtn";
 const ProfileDropdown = () => {
   return (
     <React.Fragment>

@@ -1,5 +1,5 @@
 import { useState } from "react";
-import authService from ".@/appwrite/auth";
+import authService from "@/appwrite/auth";
 import { useDispatch } from "react-redux";
 import { Button } from "react-bootstrap";
 import { logout } from "@/features/auth/authSlice";

@@ -6,7 +6,7 @@
    "@/public/*": ["public/*"],
    "@/appwrite/*": ["src/appwrite/*"],
    "@/assets/*": ["src/assets/*"],
-   "@/component/*": ["src/components/*"],
+   "@/components/*": ["src/components/*"],
    "@/conf/*": ["src/conf/*"],
    "@/entites/*": ["src/entites/*"],
    "@/features/*": ["src/features/*"],

@@ -1,7 +1,7 @@
 import  { useState, useEffect } from "react";
 import { Col, Container, Row } from "react-bootstrap";
 import appwriteService from "@/appwrite/config";
-import { PostCard } from "@/components";
+import  PostCard from "@/components/Common/PostCard";
 const AllPost = () => {
   const [posts, setPosts] = useState([]);
   useEffect(() => {
