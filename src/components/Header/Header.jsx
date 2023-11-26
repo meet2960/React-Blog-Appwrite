@@ -1,9 +1,9 @@
 import React from "react";
-import LogoutBtn from "../Common/LogoutBtn";
+import LogoutBtn from "@/Common/LogoutBtn";
 import { useSelector } from "react-redux";
 import { NavLink, useNavigate } from "react-router-dom";
 import { Button, Container, Form } from "react-bootstrap";
-import ProfileDropdown from "./ProfileDropdown";
+import ProfileDropdown from "@/component/Header/ProfileDropdown";
 
 const Header = () => {
   const authStatus = useSelector((state) => state.auth.status);

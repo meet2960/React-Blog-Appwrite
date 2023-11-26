@@ -1,16 +1,16 @@
-import React, { useState } from "react";
+// import React, { useState } from "react";
 import authService from "../../appwrite/auth";
 import { Link, useNavigate } from "react-router-dom";
-import { login } from "../../features/auth/authSlice";
-import { InputField, SelectField } from "../index";
-import { useDispatch } from "react-redux";
+// import { login } from "@/features/auth/authSlice";
+import { InputField, } from "../index";
+// import { useDispatch } from "react-redux";
 import { useForm } from "react-hook-form";
-import { Button, Card, Col, Container, Row } from "react-bootstrap";
+import {  Card, Col,  Row } from "react-bootstrap";
 import { toast } from "react-toastify";
 import LoadingButton from "../Common/LoadingButton";
 
 const SignupForm = () => {
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
   const navigate = useNavigate();
   const {
     register,

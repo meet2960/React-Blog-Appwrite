@@ -1,4 +1,4 @@
-import appwriteService from "../../appwrite/config";
+import appwriteService from "@/appwrite/config";
 import { Query } from "appwrite";
 import { postSlice } from "./postSlice";
 import { toast } from "react-toastify";

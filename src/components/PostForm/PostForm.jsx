@@ -1,19 +1,19 @@
-import React, { useCallback } from "react";
+import  { useCallback } from "react";
 import { useForm } from "react-hook-form";
-import { Button, Col, Row, Spinner } from "react-bootstrap";
+import {  Col, Row,} from "react-bootstrap";
 import { RTE, InputField, SelectField } from "../index";
 import appwriteService from "../../appwrite/config";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
-import { toast } from "react-toastify";
+// import { toast } from "react-toastify";
 import { useFilePreview } from "../../hooks/useFilePreview";
 import { createNewPost } from "../../features/posts/action";
 import LoadingButton from "../Common/LoadingButton";
 
 const PostForm = ({ post }) => {
   const dispatch = useDispatch();
-  const { filePreview, previewLoading, setPreviewLoading } = useFilePreview(
+  const { filePreview,} = useFilePreview(
     post?.featuredImage ? post.featuredImage : ""
   );
   console.log("update post", post);

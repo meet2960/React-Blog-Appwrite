@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-
+import LogHelper from "@/utility/LogHelper";
 const storedUserData = JSON.parse(localStorage.getItem("userData"));
 
 const initialState = {
@@ -17,6 +17,7 @@ export const authSlice = createSlice({
       localStorage.setItem("userData", JSON.stringify(action.payload));
     },
     logout: (state, action) => {
+      LogHelper.log("action", action);
       state.status = false;
       state.userData = null;
       localStorage.removeItem("userData");

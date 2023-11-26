@@ -1,10 +1,10 @@
-import Loader from "../../components/Common/Loader";
+import Loader from "@/components/Common/Loader";
 import { useState, useEffect } from "react";
 import { Col, Container, Row } from "react-bootstrap";
-import { PostCard } from "../../components";
+import { PostCard } from "@/components";
 import { useDispatch, useSelector } from "react-redux";
-import { clearUserPosts } from "../../features/posts/postSlice";
-import { getAllUserPosts } from "../../features/posts/action";
+import { clearUserPosts } from "@/features/posts/postSlice";
+import { getAllUserPosts } from "@/features/posts/action";
 
 const Home = () => {
   const dispatch = useDispatch();

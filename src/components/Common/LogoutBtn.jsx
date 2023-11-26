@@ -1,14 +1,15 @@
-import React, { useState } from "react";
-import authService from "../../appwrite/auth";
+import { useState } from "react";
+import authService from ".@/appwrite/auth";
 import { useDispatch } from "react-redux";
 import { Button } from "react-bootstrap";
-import { logout } from "../../features/auth/authSlice";
+import { logout } from "@/features/auth/authSlice";
 import { toast } from "react-toastify";
-
+import LogHelper from '@/utility/LogHelper'
 const LogoutBtn = () => {
   const dispatch = useDispatch();
   const [loading, setLoading] = useState(false);
   const handleLogout = () => {
+    LogHelper.log("lodaing",loading)
     setLoading(true);
     authService
       .logout()
