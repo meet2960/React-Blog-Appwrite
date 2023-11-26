@@ -1,0 +1,5 @@
+{
+  "watch": [".env"],
+  "ext": "env",
+  "exec": "node ./src/utility/EnvSample.js"
+}
