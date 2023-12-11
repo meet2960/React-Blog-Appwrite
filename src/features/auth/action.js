@@ -1,4 +1,4 @@
-import authService from "../../appwrite/auth";
+import authService from "@/appwrite/auth";
 import { toast } from "react-toastify";
 import { authSlice } from "./authSlice";
 const { actions } = authSlice;

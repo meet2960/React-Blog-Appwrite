@@ -1,7 +1,8 @@
 import { configureStore } from "@reduxjs/toolkit";
-import authSlice from "../features/auth/authSlice";
-import layoutSlice from "../features/layout/layoutSlice";
-import postSlice from "../features/posts/postSlice";
+import authSlice from "@/features/auth/authSlice";
+import layoutSlice from "@/features/layout/layoutSlice";
+import postSlice from "@/features/posts/postSlice";
+import { applicationModeObj } from "@/entites/ApplicationMode";
 
 const store = configureStore({
   reducer: {
@@ -10,7 +11,7 @@ const store = configureStore({
     posts: postSlice,
   },
   /* eslint-disable */
-  devTools: process.env.NODE_ENV !== "production",
+  devTools: process.env.NODE_ENV !== applicationModeObj.PRODUCTION,
 });
 
 export default store;

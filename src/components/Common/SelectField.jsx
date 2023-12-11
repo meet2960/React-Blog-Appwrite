@@ -1,7 +1,7 @@
 import React, { useId } from "react";
 import { Form } from "react-bootstrap";
 
-const SelectField = (
+export const SelectField = (
   { options = [], label, className = "", ...props },
   ref
 ) => {
@@ -26,4 +26,5 @@ const SelectField = (
   );
 };
 
+// eslint-disable-next-line react-refresh/only-export-components
 export default React.forwardRef(SelectField);

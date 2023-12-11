@@ -1,12 +1,12 @@
-import { Container } from "react-bootstrap";
+// import { Container } from "react-bootstrap";
 import { Header, Footer } from "../components/index";
 import { Outlet } from "react-router-dom";
-import { useDispatch } from "react-redux";
+// import { useDispatch } from "react-redux";
 import { useState } from "react";
 import { useEffect } from "react";
 const Layout = () => {
   const [loading, setLoading] = useState(true);
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
   useEffect(() => {
     // authService
     //   .getCurrentUser()

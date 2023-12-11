@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { useFilePreview } from "../../hooks/useFilePreview";
+import { useFilePreview } from "@/hooks/useFilePreview";
 const PostCard = ({ post }) => {
   const { filePreview, previewLoading, setPreviewLoading } = useFilePreview(
     post.featuredImage

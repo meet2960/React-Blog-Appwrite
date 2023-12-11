@@ -1,14 +1,14 @@
-import React, { lazy, Suspense } from "react";
+import React from "react";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
-import Layout from "../pages/Layout";
-import Home from "../pages/Home/Home";
-import Register from "../pages/Signup/Register";
-import Login from "../pages/Login/Login";
-import AllPost from "../pages/AllPost/AllPost";
-import AddPost from "../pages/AddPost/AddPost";
-import EditPost from "../pages/EditPost/EditPost";
-import SelectedPost from "../pages/SelectedPost/SelectedPost";
-import ProtectedRoute from "../components/ProtectedRoute";
+import Layout from "@/pages/Layout";
+import Home from "@/pages/Home/Home";
+import Register from "@/pages/Signup/Register";
+import Login from "@/pages/Login/Login";
+import AllPost from "@/pages/AllPost/AllPost";
+import AddPost from "@/pages/AddPost/AddPost";
+import EditPost from "@/pages/EditPost/EditPost";
+import SelectedPost from "@/pages/SelectedPost/SelectedPost";
+import ProtectedRoute from "@/components/ProtectedRoute";
 
 const AppRoutes = () => {
   const router = createBrowserRouter([

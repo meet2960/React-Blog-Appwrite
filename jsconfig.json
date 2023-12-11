@@ -1,0 +1,21 @@
+{
+ "compilerOptions": {
+ "baseUrl": ".",
+ "paths": {
+   "@/src/*": ["src/*"],
+   "@/public/*": ["public/*"],
+   "@/appwrite/*": ["src/appwrite/*"],
+   "@/assets/*": ["src/assets/*"],
+   "@/components/*": ["src/components/*"],
+   "@/conf/*": ["src/conf/*"],
+   "@/entites/*": ["src/entites/*"],
+   "@/features/*": ["src/features/*"],
+   "@/hooks/*": ["src/hooks/*"],
+   "@/pages/*": ["src/pages/*"],
+   "@/routes/*": ["src/routes/*"],
+   "@/store/*": ["src/store/*"],
+   "@/utility/*": ["src/utility/*"],
+ }
+ },
+ "exclude": ["node_modules"]
+}

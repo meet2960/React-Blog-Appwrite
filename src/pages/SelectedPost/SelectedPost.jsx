@@ -1,15 +1,15 @@
 import React, { useEffect, useState } from "react";
-import LoadingButton from "../../components/Common/LoadingButton";
-import Loader from "../../components/Common/Loader";
+import LoadingButton from "@/components/Common/LoadingButton";
+import Loader from "@/components/Common/Loader";
 import parse from "html-react-parser";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { Button, Container, Row } from "react-bootstrap";
-import { toast } from "react-toastify";
+// import { toast } from "react-toastify";
 import { BsPencilSquare, BsTrashFill } from "react-icons/bs";
-import { deletePost, getSelectedPost } from "../../features/posts/action";
-import { useFilePreview } from "../../hooks/useFilePreview";
-import { clearSelectedPost } from "../../features/posts/postSlice";
+import { deletePost, getSelectedPost } from "@/features/posts/action";
+import { useFilePreview } from "@/hooks/useFilePreview";
+import { clearSelectedPost } from "@/features/posts/postSlice";
 
 const SelectedPost = () => {
   const dispatch = useDispatch();

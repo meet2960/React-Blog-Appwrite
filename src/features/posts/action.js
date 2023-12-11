@@ -1,4 +1,4 @@
-import appwriteService from "../../appwrite/config";
+import appwriteService from "@/appwrite/config";
 import { Query } from "appwrite";
 import { postSlice } from "./postSlice";
 import { toast } from "react-toastify";
@@ -41,7 +41,13 @@ export const createNewPost = (postData, userId) => async (dispatch) => {
         postData.featuredImage = fileId;
         console.log("postdata after file upload", postData);
         return appwriteService
-          .createPost(userId, postData.slug, postData)
+          .createPost(userId, postData.slug, {
+            title: 'e',
+            slug: 'eeeee',
+            content: '<p>dwdw</p>',
+            status: 'active',
+            visibility: 'public',
+          })
           .then((createdPost) => {
             if (createdPost) {
               toast.success("Post Created Successfully");

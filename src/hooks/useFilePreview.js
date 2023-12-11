@@ -14,7 +14,7 @@ export const useFilePreview = (fileId) => {
         setFilePreview(res);
         return res;
       })
-      .catch((error) => {
+      .catch(() => {
         toast.error("Error while rendering Image");
       });
     //   .finally(() => {
