@@ -1,13 +1,13 @@
-import  { useState, useEffect } from "react";
-import { Col, Container, Row } from "react-bootstrap";
-import appwriteService from "@/appwrite/config";
-import  PostCard from "@/components/Common/PostCard";
+import { useState, useEffect } from 'react';
+import { Col, Container, Row } from 'react-bootstrap';
+import appwriteService from '@/appwrite/config';
+import PostCard from '@/components/Common/PostCard';
 const AllPost = () => {
   const [posts, setPosts] = useState([]);
   useEffect(() => {
     appwriteService
       .getAllActivePost([])
-      .then((posts) => {
+      .then(posts => {
         if (posts) {
           setPosts(posts.documents);
         } else {
@@ -15,7 +15,7 @@ const AllPost = () => {
         }
       })
       .catch(() => {
-        console.log("Error While calling api");
+        console.log('Error While calling api');
       });
   }, []);
   return (
@@ -23,7 +23,7 @@ const AllPost = () => {
       <div>
         <Row>
           {posts &&
-            posts.map((items,) => (
+            posts.map(items => (
               <Col lg={3} key={items.$id}>
                 <PostCard post={items} />
               </Col>

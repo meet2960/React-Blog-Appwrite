@@ -1,11 +1,11 @@
-import React from "react";
-import "bootstrap/dist/js/bootstrap.bundle.min";
-import "@/assets/styles/app.scss";
-import AppRoutes from "@/routes/AppRoutes";
-import { Provider } from "react-redux";
-import store from "@/store/store";
-import { ToastContainer } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
+import React from 'react'
+import 'bootstrap/dist/js/bootstrap.bundle.min'
+import '@/assets/styles/app.scss'
+import AppRoutes from '@/routes/AppRoutes'
+import { Provider } from 'react-redux'
+import { store } from '@/store/store'
+import { ToastContainer } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
 
 const App = () => {
   return (
@@ -13,7 +13,7 @@ const App = () => {
       <Provider store={store}>
         <AppRoutes />
         <ToastContainer
-          position="top-right"
+          position='top-right'
           autoClose={1000}
           hideProgressBar={true}
           newestOnTop={true}
@@ -21,7 +21,7 @@ const App = () => {
         />
       </Provider>
     </React.Fragment>
-  );
-};
+  )
+}
 
-export default App;
+export default App

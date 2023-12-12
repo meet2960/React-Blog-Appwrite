@@ -1,75 +1,75 @@
-import React from "react";
-import LogoutBtn from "@/components/Common/LogoutBtn";
-import { useSelector } from "react-redux";
-import { NavLink, useNavigate } from "react-router-dom";
-import { Button, Container, Form } from "react-bootstrap";
-import ProfileDropdown from "@/components/Header/ProfileDropdown";
+import React from 'react';
+import LogoutBtn from '@/components/Common/LogoutBtn';
+import { useSelector } from 'react-redux';
+import { NavLink, useNavigate } from 'react-router-dom';
+import { Button, Container, Form } from 'react-bootstrap';
+import ProfileDropdown from '@/components/Header/ProfileDropdown';
 
 const Header = () => {
-  const authStatus = useSelector((state) => state.auth.status);
+  const authStatus = useSelector(state => state.auth.status);
   const navigate = useNavigate();
   const navItems = [
     {
-      name: "Home",
-      path: "/",
-      active: true,
+      name: 'Home',
+      path: '/',
+      active: true
     },
     {
-      name: "Login",
-      path: "/login",
-      active: !authStatus,
+      name: 'Login',
+      path: '/login',
+      active: !authStatus
     },
     {
-      name: "Signup",
-      path: "/signup",
-      active: !authStatus,
+      name: 'Signup',
+      path: '/signup',
+      active: !authStatus
     },
     {
-      name: "All Posts",
-      path: "/all-posts",
-      active: authStatus,
+      name: 'All Posts',
+      path: '/all-posts',
+      active: authStatus
     },
     {
-      name: "Add Post",
-      path: "/add-post",
-      active: authStatus,
-    },
+      name: 'Add Post',
+      path: '/add-post',
+      active: authStatus
+    }
   ];
   return (
-    <div className="nav-bg">
+    <div className='nav-bg'>
       <Container>
-        <nav className="navbar navbar-expand-lg py-3">
-          <div className="container-fluid">
-            <h4 className="me-3 mb-0 fw-semibold">
-              <NavLink to={"/"} className="text-decoration-none">
+        <nav className='navbar navbar-expand-lg py-3'>
+          <div className='container-fluid'>
+            <h4 className='me-3 mb-0 fw-semibold'>
+              <NavLink to={'/'} className='text-decoration-none'>
                 TinyBlogs
               </NavLink>
             </h4>
             <button
-              className="navbar-toggler"
-              type="button"
-              data-bs-toggle="collapse"
-              data-bs-target="#navbarTogglerDemo02"
-              aria-controls="navbarTogglerDemo02"
-              aria-expanded="false"
-              aria-label="Toggle navigation"
+              className='navbar-toggler'
+              type='button'
+              data-bs-toggle='collapse'
+              data-bs-target='#navbarTogglerDemo02'
+              aria-controls='navbarTogglerDemo02'
+              aria-expanded='false'
+              aria-label='Toggle navigation'
             >
-              <span className="navbar-toggler-icon"></span>
+              <span className='navbar-toggler-icon'></span>
             </button>
-            <div className="collapse navbar-collapse" id="navbarTogglerDemo02">
+            <div className='collapse navbar-collapse' id='navbarTogglerDemo02'>
               <div>
-                <Form.Control type="text" placeholder="Search" />
+                <Form.Control type='text' placeholder='Search' />
               </div>
-              <ul className="navbar-nav ms-auto mb-2 mb-lg-0">
+              <ul className='navbar-nav ms-auto mb-2 mb-lg-0'>
                 {navItems &&
-                  navItems.map((items) =>
+                  navItems.map(items =>
                     items.active ? (
-                      <li key={items.name} className="nav-item">
+                      <li key={items.name} className='nav-item'>
                         <Button
-                          type="button"
-                          size="sm"
-                          className="ms-2"
-                          variant="primary"
+                          type='button'
+                          size='sm'
+                          className='ms-2'
+                          variant='primary'
                           onClick={() => navigate(items.path)}
                         >
                           {items.name}
@@ -79,7 +79,7 @@ const Header = () => {
                   )}
                 {authStatus && (
                   <React.Fragment>
-                    <li className="nav-item">
+                    <li className='nav-item'>
                       <LogoutBtn />
                     </li>
                   </React.Fragment>
