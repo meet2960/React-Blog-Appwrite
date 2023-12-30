@@ -1,0 +1,649 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Full Calender Example</title>
+    <!-- ? Bootstrap  -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
+      crossorigin="anonymous"
+    />
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js"
+      integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
+      integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
+      crossorigin="anonymous"
+    ></script>
+    <!-- ? JQeury link  -->
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"
+      integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
+    <!-- ? Modern/Original JS  -->
+    <!-- <script>
+      document.addEventListener('DOMContentLoaded', function () {
+        let calendarEl = document.getElementById('calendar');
+        let calendar = new FullCalendar.Calendar(calendarEl, {
+          initialView: 'dayGridMonth',
+          editable: true,
+          droppable: true,
+          headerToolbar: {
+            start: 'dayGridMonth,timeGridWeek,timeGridDay',
+            center: 'title',
+            end: 'prevYear,prev,next,nextYear'
+          },
+          titleFormat: {
+            year: 'numeric',
+            month: 'short',
+            day: 'numeric'
+          },
+          events: [
+            {
+              id: '1',
+              title: 'New Event',
+              start: '2023-12-15'
+              //   overlap: false
+            },
+            {
+              id: '2',
+              title: 'Next Event',
+              start: '2023-12-12'
+              //   overlap: false
+            },
+            {
+              id: '3',
+              title: 'My Event',
+              start: '2023-12-17'
+              //   overlap: false
+            }
+          ],
+          eventAllow: function (dropInfo, draggedEvent) {
+            return dropInfo.start >= new Date();
+          },
+          eventClick: function (e) {
+            console.log('event Clicked');
+          },
+          dateClick: function (e) {
+            console.log('date Clicked', e);
+          },
+          eventAdd: function (info) {
+            console.log('AddEvent Fired', info);
+            console.log(calendar.getEvents().length);
+            // if (calendar.getEvents().length > 1) {
+            //   calendar.getEvents().slice(-1)[0].remove();
+            // }
+          },
+          eventOverlap: function (stillEvent, movingEvent) {
+            console.log('Event eventOverlap', stillEvent);
+            console.log('Moving Event', movingEvent);
+            // return false;
+            // return stillEvent.allDay && movingEvent.allDay ? false : true;
+          },
+          eventDrop: function (info) {
+            // console.log('DropEvent Fired', info);
+            var newDate = info.event.start;
+            // console.log('New Date:', newDate);
+          }
+        });
+        calendar.render();
+      });
+    </script> -->
+
+    <!-- Used Code  -->
+    <!-- <script>
+            !(function (v) {
+        "use strict";
+        function e() {}
+        (e.prototype.init = function () {
+          var a = v("#event-modal"),
+            t = v("#modal-title"),
+            n = v("#form-event"),
+            l = null,
+            i = null,
+            r = document.getElementsByClassName("needs-validation"),
+            l = null,
+            i = null,
+            e = new Date(),
+            s = e.getDate(),
+            d = e.getMonth(),
+            e = e.getFullYear();
+          new FullCalendarInteraction.Draggable(
+            document.getElementById("external-events"),
+            {
+              itemSelector: ".external-event",
+              eventData: function (e) {
+                return { title: e.innerText, className: v(e).data("class") };
+              },
+            }
+          );
+          (e = [
+            { title: "All Day Event", start: new Date(e, d, 1) },
+            {
+              title: "Long Event",
+              start: new Date(e, d, s - 5),
+              end: new Date(e, d, s - 2),
+              className: "bg-warning",
+            },
+            {
+              id: 999,
+              title: "Repeating Event",
+              start: new Date(e, d, s - 3, 16, 0),
+              allDay: !1,
+              className: "bg-info",
+            },
+            {
+              id: 999,
+              title: "Repeating Event",
+              start: new Date(e, d, s + 4, 16, 0),
+              allDay: !1,
+              className: "bg-primary",
+            },
+            {
+              title: "Meeting",
+              start: new Date(e, d, s, 10, 30),
+              allDay: !1,
+              className: "bg-success",
+            },
+            {
+              title: "Lunch",
+              start: new Date(e, d, s, 12, 0),
+              end: new Date(e, d, s, 14, 0),
+              allDay: !1,
+              className: "bg-danger",
+            },
+            {
+              title: "Birthday Party",
+              start: new Date(e, d, s + 1, 19, 0),
+              end: new Date(e, d, s + 1, 22, 30),
+              allDay: !1,
+              className: "bg-success",
+            },
+            {
+              title: "Click for Google",
+              start: new Date(e, d, 28),
+              end: new Date(e, d, 29),
+              url: "http://google.com/",
+              className: "bg-dark",
+            },
+          ]),
+            document.getElementById("external-events"),
+            (d = document.getElementById("calendar"));
+          function o(e) {
+            a.modal("show"),
+              n.removeClass("was-validated"),
+              n[0].reset(),
+              v("#event-title").val(),
+              v("#event-category").val(),
+              t.text("Add Event"),
+              (i = e);
+          }
+          var c = new FullCalendar.Calendar(d, {
+            plugins: ["bootstrap", "interaction", "dayGrid", "timeGrid"],
+            editable: !0,
+            droppable: !0,
+            selectable: !0,
+            defaultView: "dayGridMonth",
+            themeSystem: "bootstrap",
+            header: {
+              left: "prev,next today",
+              center: "title",
+              right: "dayGridMonth,timeGridWeek,timeGridDay,listMonth",
+            },
+            eventClick: function (e) {
+              a.modal("show"),
+                n[0].reset(),
+                (l = e.event),
+                v("#event-title").val(l.title),
+                v("#event-category").val(l.classNames[0]),
+                (i = null),
+                t.text("Edit Event"),
+                (i = null);
+            },
+            dateClick: function (e) {
+              o(e);
+            },
+            events:  [
+            { title: "All Day Event", start: new Date(e, d, 1) },
+            {
+              title: "Long Event",
+              start: new Date(e, d, s - 5),
+              end: new Date(e, d, s - 2),
+              className: "bg-warning",
+            },
+            {
+              id: 999,
+              title: "Repeating Event",
+              start: new Date(e, d, s - 3, 16, 0),
+              allDay: !1,
+              className: "bg-info",
+            },
+            {
+              id: 999,
+              title: "Repeating Event",
+              start: new Date(e, d, s + 4, 16, 0),
+              allDay: !1,
+              className: "bg-primary",
+            },
+            {
+              title: "Meeting",
+              start: new Date(e, d, s, 10, 30),
+              allDay: !1,
+              className: "bg-success",
+            },
+            {
+              title: "Lunch",
+              start: new Date(e, d, s, 12, 0),
+              end: new Date(e, d, s, 14, 0),
+              allDay: !1,
+              className: "bg-danger",
+            },
+            {
+              title: "Birthday Party",
+              start: new Date(e, d, s + 1, 19, 0),
+              end: new Date(e, d, s + 1, 22, 30),
+              allDay: !1,
+              className: "bg-success",
+            },
+            {
+              title: "Click for Google",
+              start: new Date(e, d, 28),
+              end: new Date(e, d, 29),
+              url: "http://google.com/",
+              className: "bg-dark",
+            },
+          ],
+          });
+          c.render(),
+            v(n).on("submit", function (e) {
+              e.preventDefault();
+              v("#form-event :input");
+              var t = v("#event-title").val(),
+                e = v("#event-category").val();
+              !1 === r[0].checkValidity()
+                ? (event.preventDefault(),
+                  event.stopPropagation(),
+                  r[0].classList.add("was-validated"))
+                : (l
+                    ? (l.setProp("title", t), l.setProp("classNames", [e]))
+                    : ((e = {
+                        title: t,
+                        start: i.date,
+                        allDay: i.allDay,
+                        className: e,
+                      }),
+                      c.addEvent(e)),
+                  a.modal("hide"));
+            }),
+            v("#btn-delete-event").on("click", function (e) {
+              l && (l.remove(), (l = null), a.modal("hide"));
+            }),
+            v("#btn-new-event").on("click", function (e) {
+              o({ date: new Date(), allDay: !0 });
+            });
+        }),
+          (v.CalendarPage = new   ()),
+          (v.CalendarPage.Constructor = e);
+      })(window.jQuery),
+        (function () {
+          "use strict";
+          window.jQuery.CalendarPage.init();
+        })();
+    </script> -->
+  </head>
+  <body>
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-2">
+          <button class="btn btn-primary">Create New</button>
+        </div>
+        <div class="col">
+          <div id="calendar"></div>
+        </div>
+      </div>
+      <div class="modal fade" id="event-modal" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered">
+          <div class="modal-content">
+            <div class="modal-header py-3 px-4 border-bottom-0">
+              <h5 class="modal-title" id="modal-title">Event</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-hidden="true"></button>
+            </div>
+            <div class="modal-body p-4">
+              <form method="post">
+                {% csrf_token %}
+                <div class="row">
+                  <div class="col-12">
+                    <div class="mb-3">
+                      <label class="form-label">Holiday Name</label>
+                      <input
+                        class="form-control"
+                        placeholder="Insert Holiday Name"
+                        type="text"
+                        name="Holiday_Name"
+                        id="event-title"
+                      />
+                      <div class="invalid-feedback">Please provide a valid holiday name</div>
+                    </div>
+                  </div>
+
+                  <div class="col-12">
+                    <div class="mb-3">
+                      <label class="form-label">Holiday Date</label>
+                      <input class="form-control" type="date" required value="" name="event-date" id="date" />
+                      <div class="invalid-feedback">Please provide a valid holiday Date</div>
+                    </div>
+                  </div>
+                  <div class="col-12">
+                    <div class="mb-3">
+                      <label class="form-label">Shift</label>
+                      <input class="form-control" type="text" id="event-shift" required value="" name="Shift" />
+                      <div class="invalid-feedback">Please provide a valid Message Date</div>
+                    </div>
+                  </div>
+                  <div class="col-12">
+                    <div class="mb-3">
+                      <label class="form-label">Location</label>
+                      <input class="form-control" type="text" id="event-location" required value="" name="Location" />
+
+                      <div class="invalid-feedback">Please provide a valid Message Date</div>
+                    </div>
+                  </div>
+
+                  <div class="col-12" id="DateBox"></div>
+                </div>
+                <div class="row mt-2">
+                  <div class="col-6">
+                    <button type="button" class="btn btn-danger" id="btn-delete-event" name="submit" value="delete">
+                      Delete
+                    </button>
+                  </div>
+                  <div class="col-6 text-end">
+                    <button type="button" class="btn btn-light me-1" data-bs-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-success" id="btn-save-event" name="submit" value="create">
+                      Save
+                    </button>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+
+  <script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.10/index.global.min.js"></script>
+
+  <script src="
+https://cdn.jsdelivr.net/npm/@fullcalendar/interaction@6.1.10/index.global.min.js
+"></script>
+  <script src="
+https://cdn.jsdelivr.net/npm/@fullcalendar/core@6.1.10/index.global.min.js
+"></script>
+
+  <script src="https://cdn.jsdelivr.net/npm/fullcalendar-scheduler@6.1.10/index.global.min.js"></script>
+
+  <!-- <script>
+    (function (v) {
+      console.log('Callung IFFEs');
+      ('use strict');
+
+      function e() {
+        console.log('Caling eeeee', e);
+      }
+      console.log(e);
+      e.prototype.init = function () {
+        var a = v('#event-modal'),
+          t = v('#modal-title'),
+          n = v('#form-event'),
+          l = null,
+          i = null,
+          r = document.getElementsByClassName('needs-validation'),
+          e = new Date(),
+          s = e.getDate(),
+          d = e.getMonth(),
+          year = e.getFullYear();
+
+        var externalEvents = document.getElementById('external-events');
+        var calendarElement = document.getElementById('calendar');
+
+        function o(e) {
+          a.modal('show'),
+            n.removeClass('was-validated'),
+            n[0].reset(),
+            v('#event-title').val(),
+            v('#event-category').val(),
+            t.text('Add Event'),
+            (i = e);
+        }
+
+        var c = new FullCalendar.Calendar(calendarElement, {
+          plugins: ['bootstrap', 'interaction', 'dayGrid', 'timeGrid'],
+          editable: true,
+          droppable: true,
+          selectable: true,
+          defaultView: 'dayGridMonth',
+          themeSystem: 'bootstrap',
+          header: {
+            left: 'prev,next today',
+            center: 'title',
+            right: 'dayGridMonth,timeGridWeek,timeGridDay,listMonth'
+          },
+          eventClick: function (e) {
+            a.modal('show'),
+              n[0].reset(),
+              (l = e.event),
+              v('#event-title').val(l.title),
+              v('#event-category').val(l.classNames[0]),
+              (i = null),
+              t.text('Edit Event'),
+              (i = null);
+          },
+          dateClick: function (e) {
+            o(e);
+          },
+          events: [
+            { title: 'All Day Event', start: new Date(year, d, 1) },
+            {
+              title: 'Long Event',
+              start: new Date(year, d, s - 5),
+              end: new Date(year, d, s - 2),
+              className: 'bg-warning'
+            },
+            {
+              id: 999,
+              title: 'Repeating Event',
+              start: new Date(year, d, s - 3, 16, 0),
+              allDay: false,
+              className: 'bg-info'
+            },
+            {
+              id: 999,
+              title: 'Repeating Event',
+              start: new Date(year, d, s + 4, 16, 0),
+              allDay: false,
+              className: 'bg-primary'
+            },
+            {
+              title: 'Meeting',
+              start: new Date(year, d, s, 10, 30),
+              allDay: false,
+              className: 'bg-success'
+            },
+            {
+              title: 'Lunch',
+              start: new Date(year, d, s, 12, 0),
+              end: new Date(year, d, s, 14, 0),
+              allDay: false,
+              className: 'bg-danger'
+            },
+            {
+              title: 'Birthday Party',
+              start: new Date(year, d, s + 1, 19, 0),
+              end: new Date(year, d, s + 1, 22, 30),
+              allDay: false,
+              className: 'bg-success'
+            },
+            {
+              title: 'Click for Google',
+              start: new Date(year, d, 28),
+              end: new Date(year, d, 29),
+              url: 'http://google.com/',
+              className: 'bg-dark'
+            }
+          ]
+        });
+
+        c.render();
+      };
+
+      // Create an instance of the e class
+      var calendarPageInstance = new e();
+      calendarPageInstance.init();
+      v.CalendarPage = calendarPageInstance;
+    })(window.jQuery);
+  </script> -->
+  <script>
+    !(function (v) {
+      'use strict';
+
+      var CalendarPage = function () {};
+
+      CalendarPage.prototype.init = function () {
+        var a = v('#event-modal'),
+          t = v('#modal-title'),
+          n = v('#form-event'),
+          l = null,
+          i = null,
+          r = Array.from(document.getElementsByClassName('needs-validation')),
+          e = new Date(),
+          s = e.getDate(),
+          d = e.getMonth(),
+          y = e.getFullYear();
+
+        var events = [
+          { title: 'Holiday 1', start: '2023-12-11' },
+          { title: 'Holiday 2', start: '2023-12-12' },
+          { title: 'Holiday 3', start: '2023-12-13' },
+          { title: 'Holiday 4', start: '2023-12-14' },
+          { title: 'Holiday 5', start: '2023-12-15' }
+        ];
+        var calendarElement = document.getElementById('calendar');
+
+        function openModal(e) {
+          a.modal('show');
+        }
+
+        var calendar = new FullCalendar.Calendar(calendarElement, {
+          initialView: 'dayGridMonth',
+          editable: true,
+          droppable: true,
+          selectable: true,
+          themeSystem: 'bootstrap',
+          headerToolbar: {
+            left: 'prev,next today',
+            center: 'title',
+            right: 'dayGridMonth,timeGridWeek,timeGridDay,listMonth'
+          },
+          eventClick: function (e) {
+            console.log('eventClick', e);
+              .modal('show');
+            var title = $('#event-title'),
+              oldDate = $('#event-date'),
+              oldShift = $('#event-shift'),
+              oldLocation = $('#event-location');
+            console.log('oldDate', title);
+            var getTitle = e.event._def.title;
+            console.log('getTitle', getTitle);
+            $('#event-date').val(getTitle);
+          },
+          dateClick: function (e) {
+            console.log('dateClick', e);
+            openModal(e);
+          },
+          events: events
+        });
+
+        calendar.render();
+      };
+
+      window.jQuery.CalendarPage = new CalendarPage();
+      window.jQuery.CalendarPage.Constructor = CalendarPage;
+      window.jQuery.CalendarPage.init();
+    })(window.jQuery);
+  </script>
+  <!-- <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      let calendarElement = document.getElementById('calendar');
+      let c = new FullCalendar.Calendar(calendarElement, {
+        editable: true,
+        droppable: true,
+        selectable: true,
+        defaultView: 'dayGridMonth',
+        themeSystem: 'bootstrap',
+        header: {
+          left: 'prev,next today',
+          center: 'title',
+          right: 'dayGridMonth,timeGridWeek,timeGridDay,listMonth'
+        },
+        eventClick: function (e) {
+          console.log('Event Click');
+        },
+        dateClick: function (e) {
+          console.log('dateClcick');
+        },
+        events: [
+          {
+            title: 'Long Event',
+            className: 'bg-warning',
+            start: '2023-12-12'
+          },
+          {
+            id: 999,
+            title: 'Repeating Event',
+            allDay: false,
+            start: '2023-12-13',
+            className: 'bg-info'
+          },
+          {
+            id: 999,
+            title: 'Repeating Event',
+            allDay: false,
+            className: 'bg-primary'
+          },
+          {
+            title: 'Meeting',
+            allDay: false,
+            className: 'bg-success'
+          },
+          {
+            title: 'Lunch',
+            allDay: false,
+            className: 'bg-danger'
+          },
+          {
+            title: 'Birthday Party',
+            allDay: false,
+            className: 'bg-success'
+          },
+          {
+            title: 'Click for Google',
+            url: 'http://google.com/',
+            className: 'bg-dark'
+          }
+        ]
+      });
+
+      console.log('calender ins', c);
+      c.render();
+    });
+  </script> -->
+</html>
