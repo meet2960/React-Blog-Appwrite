@@ -22,7 +22,7 @@ const LogoutBtn = () => {
       });
   };
   return (
-    <Button type='button' className='ms-2' size='sm' onClick={handleLogout}>
+    <Button type='button' className='w-100' size='sm' onClick={handleLogout}>
       Logout
     </Button>
   );

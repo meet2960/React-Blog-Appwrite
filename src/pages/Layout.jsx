@@ -1,3 +1,4 @@
+import NewPostBtn from '../components/Common/NewPostBtn';
 import { Header, Footer } from '../components/index';
 import { Outlet } from 'react-router-dom';
 

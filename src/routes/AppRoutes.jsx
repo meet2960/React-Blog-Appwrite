@@ -36,7 +36,7 @@ const AppRoutes = () => {
           path: '/',
           element: (
             <ProtectedRoute authentication>
-              <Home />,
+              <Home />
             </ProtectedRoute>
           )
         },
@@ -68,7 +68,7 @@ const AppRoutes = () => {
           path: '/post/:slug',
           element: (
             <ProtectedRoute authentication>
-              <SelectedPost />,
+              <SelectedPost />
             </ProtectedRoute>
           )
         }

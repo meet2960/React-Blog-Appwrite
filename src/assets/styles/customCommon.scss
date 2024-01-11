@@ -3,7 +3,7 @@
   --bs-btn-font-size: 14px;
 }
 body {
-  font-family: "Poppins", sans-serif;
+  font-family: 'Poppins', sans-serif;
   font-size: 14px;
 }
 .wrapper {
@@ -12,7 +12,8 @@ body {
   flex-direction: column;
 }
 .main {
-  padding: 1rem 0;
+  margin: 2rem 0;
+  // padding: 1rem 0;
   display: flex;
   flex-direction: column;
   flex-grow: 1;
@@ -55,10 +56,49 @@ body {
     top: 55%;
   }
 }
-
+// * Common Card Component
 .post {
-  .post-img {
-    height: 200px;
-    object-fit: cover;
+  overflow: hidden;
+  .post-img-container {
+    overflow: hidden;
+    height: 100%;
+    .post-img {
+      height: 200px;
+      object-fit: cover;
+      transition: all 0.5s ease-in-out 0s;
+      border-radius: 0.5rem;
+      &:hover {
+        &.post-img {
+          transform: scale(1.2);
+        }
+      }
+    }
   }
+}
+
+.image-preview {
+  display: flex;
+  justify-content: center;
+  img {
+    max-height: 300px;
+    object-fit: contain;
+  }
+}
+
+// * Create New Post BTN
+.add-new-btn {
+  position: fixed;
+  bottom: 11%;
+  right: 8%;
+  border-radius: 50%;
+  height: 45px;
+  width: 45px;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.html-content {
+  margin: 1.5rem 0;
 }

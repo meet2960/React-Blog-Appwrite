@@ -4,12 +4,12 @@ import Loader from '@/components/Common/Loader';
 import parse from 'html-react-parser';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { Button, Container, Row } from 'react-bootstrap';
-// import { toast } from "react-toastify";
+import { Button, Card, CardBody, Container, Row } from 'react-bootstrap';
 import { BsPencilSquare, BsTrashFill } from 'react-icons/bs';
 import { deletePost, getSelectedPost } from '@/features/posts/action';
 import { useFilePreview } from '@/hooks/useFilePreview';
 import { clearSelectedPost } from '@/features/posts/postSlice';
+import { formatDate } from '@/src/utils/formatDate';
 
 const SelectedPost = () => {
   const dispatch = useDispatch();
@@ -57,54 +57,63 @@ const SelectedPost = () => {
     );
   }
 
-  return selectedPost ? (
-    <div className='py-8'>
-      <Container>
-        <Row className=''>
-          <div className=''>
-            <h2 className='text-2xl font-bold'>{selectedPost.title}</h2>
-            <div>
-              <span>Created by : {userData.name}</span>
-            </div>
-          </div>
-          <div className='col-6'>
-            {previewLoading && (
-              <React.Fragment>
-                <div className='skeleton skeleton-img' />
-              </React.Fragment>
-            )}
+  return (
+    <div className='my-div'>
+      {selectedPost && (
+        <Container>
+          <Card className='overflow-hidden'>
+            <CardBody className='bg-white'>
+              <div className=''>
+                <h2 className='text-2xl font-bold text-center mb-4'>{selectedPost.title}</h2>
+                <div className='d-flex justify-content-between mb-3'>
+                  <div>
+                    <span>Created by : {userData.name}</span>
+                  </div>
+                  <div>
+                    <span>Published on {formatDate(selectedPost.$createdAt)}</span>
+                  </div>
+                </div>
+              </div>
+              <div className='col-12'>
+                {previewLoading && (
+                  <React.Fragment>
+                    <div className='skeleton skeleton-img w-100' />
+                  </React.Fragment>
+                )}
 
-            <img
-              src={filePreview}
-              alt={selectedPost.title}
-              onLoad={() => setPreviewLoading(false)}
-              className={`rounded-xl img-fluid ${previewLoading ? 'd-none' : 'd-block'}`}
-            />
-          </div>
-
-          {isAuthor && (
-            <div className='gap-5 d-flex'>
-              <Link to={`/edit-post/${selectedPost.$id}`}>
-                <Button variant='warning' className='mr-3'>
-                  <BsPencilSquare />
-                </Button>
-              </Link>
-              <LoadingButton
-                variant={'danger'}
-                onClick={handleDeletePost}
-                loading={deleteLoading}
-                disabled={deleteLoading}
-              >
-                <BsTrashFill />
-              </LoadingButton>
-            </div>
-          )}
-        </Row>
-
-        <div className='browser-css'>{selectedPost.content ? parse(selectedPost.content) : null}</div>
-      </Container>
+                <img
+                  src={filePreview}
+                  alt={selectedPost.title}
+                  onLoad={() => setPreviewLoading(false)}
+                  className={`rounded-xl overflow-hidden img-fluid ${previewLoading ? 'd-none' : 'd-block'}`}
+                />
+              </div>
+              <div className='html-content'>{selectedPost.content ? parse(selectedPost.content) : null}</div>
+              {isAuthor && (
+                <div className='d-flex flex-column justify-content-end align-items-start'>
+                  <div className='gap-5 d-flex justify-content-between'>
+                    <Link to={`/edit-post/${selectedPost.$id}`}>
+                      <Button variant='warning' className='mr-3'>
+                        <BsPencilSquare />
+                      </Button>
+                    </Link>
+                    <LoadingButton
+                      variant={'danger'}
+                      onClick={handleDeletePost}
+                      loading={deleteLoading}
+                      disabled={deleteLoading}
+                    >
+                      <BsTrashFill />
+                    </LoadingButton>
+                  </div>
+                </div>
+              )}
+            </CardBody>
+          </Card>
+        </Container>
+      )}
     </div>
-  ) : null;
+  );
 };
 
 export default SelectedPost;

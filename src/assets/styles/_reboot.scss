@@ -7,3 +7,10 @@
 .btn {
   --bs-btn-font-size: 14px;
 }
+
+.dropdown-item.active,
+.dropdown-item:active {
+  color: inherit;
+  text-decoration: none;
+  background-color: inherit;
+}

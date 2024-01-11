@@ -15,7 +15,6 @@ const PostForm = ({ post }) => {
   const dispatch = useDispatch();
   const { filePreview } = useFilePreview(post?.featuredImage ? post.featuredImage : '');
   console.log('update post', post);
-  console.log('update Re rendering');
   const {
     control,
     register,
@@ -30,19 +29,21 @@ const PostForm = ({ post }) => {
       slug: post?.slug || '',
       content: post?.slug || '',
       status: post?.status || 'active',
-      visibility: post?.visibility || 'public'
+      visibility: post?.visibility || 'public',
+      image: ''
     },
     values: {
       title: post?.title || '',
       slug: post?.slug || '',
       content: post?.slug || '',
       status: post?.status || 'active',
-      visibility: post?.visibility || 'public'
+      visibility: post?.visibility || 'public',
+      image: ''
     }
   });
   const navigate = useNavigate();
   const { userData } = useSelector(state => state.auth);
-  console.log('component data', userData);
+  // console.log('component data', userData);
 
   const updateFormData = async data => {
     console.log('component data', data);
@@ -60,6 +61,7 @@ const PostForm = ({ post }) => {
         navigate(`/post/${dbPost.$id}`);
       }
     } else {
+      console.log('Document to be Created', data);
       return dispatch(createNewPost(data, userData.$id)).then(post => {
         navigate(`/post/${post.$id}`);
       });
@@ -90,9 +92,11 @@ const PostForm = ({ post }) => {
       subscription.unsubscribe();
     };
   }, [watch, slugTransform, setValue]);
+  const imagePreviewValue = watch('image');
 
   return (
     <div className='post-form'>
+      <h2 className='text-center mb-3'>{!post ? 'Create New Post' : 'Edit Your Post'}</h2>
       <form onSubmit={handleSubmit(updateFormData)} className='flex flex-wrap'>
         <Row className='gy-4'>
           <Col xs={12} lg={6}>
@@ -110,14 +114,6 @@ const PostForm = ({ post }) => {
               }}
             />
           </Col>
-          <Col xs={12} lg={6}>
-            <InputField
-              label='Featured Image :'
-              type='file'
-              accept='image/png, image/jpg, image/jpeg, image/gif'
-              {...register('image', { required: !post })}
-            />
-          </Col>
 
           <Col xs={12} lg={6}>
             <SelectField options={['Active', 'Inactive']} label='Status' {...register('status', { required: true })} />
@@ -132,6 +128,22 @@ const PostForm = ({ post }) => {
           </Col>
           <Col xs={6}>
             <RTE label='Content :' name='content' control={control} defaultValue={getValues('content')} />
+          </Col>
+          <Col xs={12} lg={6}>
+            <InputField
+              label='Featured Image :'
+              type='file'
+              accept='image/png, image/jpg, image/jpeg, image/gif'
+              {...register('image', { required: !post })}
+            />
+            {/* Input File Preview  */}
+            {imagePreviewValue && imagePreviewValue[0] && (
+              <>
+                <div className='image-preview mt-3'>
+                  <img src={URL.createObjectURL(imagePreviewValue[0])} alt='Preview Image' className='img-fluid' />
+                </div>
+              </>
+            )}
           </Col>
           <Col xs={6}>
             <div className=''>

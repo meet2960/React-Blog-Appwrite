@@ -16,14 +16,16 @@ const PostCard = ({ post }) => {
 
           <React.Fragment>
             <div className='d-flex justify-content-center align-items-center'>
-              <img
-                src={filePreview}
-                alt={post?.title}
-                className={`post-img img-fluid rounded-3 ${previewLoading ? 'd-none' : 'd-block'}`}
-                onLoad={() => {
-                  setPreviewLoading(false);
-                }}
-              />
+              <div className='post-img-container'>
+                <img
+                  src={filePreview}
+                  alt={post?.title}
+                  className={`post-img ${previewLoading ? 'd-none' : 'd-block'}`}
+                  onLoad={() => {
+                    setPreviewLoading(false);
+                  }}
+                />
+              </div>
             </div>
           </React.Fragment>
           <div className='mt-2'>
